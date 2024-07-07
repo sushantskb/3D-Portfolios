@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import arrow from "../assets/icons/arrow.svg";
 const InfoBox = ({ text, link, btnText }) => {
   return (
-    <div className="info-box">
+    <div className="info-box neo-brutalism-space">
       <p className="font-medium sm:text-xl text-center">{text}</p>
       <Link className="neo-brutalism-white neo-btn" to={link}>
         {btnText}

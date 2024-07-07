@@ -5,20 +5,22 @@
 @tailwind utilities;
 
 :root {
-  --blue-rgb: 237 245 255;
-  --green-rgb: 125 161 35;
+  --space-primary: 15 32 39; /* Dark Space Blue */
+  --space-secondary: 32 58 67; /* Medium Space Blue */
+  --space-accent: 44 83 100; /* Light Space Blue */
+  --space-highlight: 204 219 234; /* Star-like Highlight */
 }
 
 body {
   font-family: "Work Sans", sans-serif;
 }
 
-body:has(.card[data-color="blue"]:hover) {
-  background-color: rgb(var(--blue-rgb) / 25%);
+body:has(.card[data-color="space-primary"]:hover) {
+  background-color: rgb(var(--space-primary) / 25%);
 }
 
-body:has(.card[data-color="green"]:hover) {
-  background-color: rgb(var(--green-rgb) / 25%);
+body:has(.card[data-color="space-secondary"]:hover) {
+  background-color: rgb(var(--space-secondary) / 25%);
 }
 
 @layer utilities {
@@ -35,7 +37,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .blue-gradient_text {
-    @apply bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#001f3f] to-[#0074D9] bg-clip-text text-transparent; /* Space Gradient */
   }
 
   .input {
@@ -47,7 +49,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .btn {
-    @apply text-white bg-gradient-to-r from-[#00c6ff] to-[#0072ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
+    @apply text-white bg-gradient-to-r from-[#001f3f] to-[#0074D9] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center; /* Space Gradient */
   }
 
   .header {
@@ -63,7 +65,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .info-box {
-    @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8;
+    @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-space pt-4 pb-12 px-8; /* Space Theme */
   }
 
   .neo-btn {
@@ -80,7 +82,7 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 .glassmorphism {
-  background: rgba(8, 116, 239, 0.07);
+  background: rgba(15, 32, 39, 0.07); /* Dark Space Blue */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -127,7 +129,7 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 .block-container .btn-back-blue {
-  background: linear-gradient(135deg, #0061ff -20%, #60efff 120%);
+  background: linear-gradient(135deg, #001f3f -20%, #0074D9 120%); /* Space Gradient */
 }
 
 .block-container .btn-back-orange {
@@ -166,18 +168,21 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 /* Neo Brutalism */
-.neo-brutalism-blue {
-  background: #2b77e7;
+.neo-brutalism-space {
+  background: rgb(var(--space-primary));
   position: relative;
   border-radius: 10px;
-  border: #2b77e7;
-  box-shadow: 0.6vmin 0.6vmin #336cc1, 1vmin 1vmin #0092db, 1vmin 1vmin #0092db,
-    0.65vmin 1vmin #0092db, 1vmin 0.65vmin #0092db;
+  border: 1px solid rgb(var(--space-primary));
+  box-shadow: 0.6vmin 0.6vmin rgb(var(--space-secondary)),
+    1vmin 1vmin rgb(var(--space-accent)),
+    1vmin 1vmin rgb(var(--space-accent)),
+    0.65vmin 1vmin rgb(var(--space-accent)),
+    1vmin 0.65vmin rgb(var(--space-accent));
 }
 
 .neo-brutalism-white {
   background: #fff;
-  border: #fff;
+  border: 1px solid #fff;
   box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
     0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
 }
