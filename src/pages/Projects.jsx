@@ -8,8 +8,8 @@ const Projects = () => {
   return (
     <section className='max-container'>
       <h1 className='head-text'>
-        My{" "}
-        <span className='blue-gradient_text drop-shadow font-semibold'>
+        <span className="text-slate-400">My{" "}</span>
+        <span className='bg-gradient-to-r from-blue-800 to-purple-600 bg-clip-text text-transparent drop-shadow font-semibold'>
           Projects
         </span>
       </h1>
@@ -37,7 +37,7 @@ const Projects = () => {
             </div>
 
             <div className='mt-5 flex flex-col'>
-              <h4 className='text-2xl font-poppins font-semibold'>
+              <h4 className='text-white text-2xl font-poppins font-semibold'>
                 {project.name}
               </h4>
               <p className='mt-2 text-slate-500'>{project.description}</p>
