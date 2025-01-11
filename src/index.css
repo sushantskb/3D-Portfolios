@@ -49,7 +49,7 @@ body:has(.card[data-color="space-secondary"]:hover) {
   }
 
   .btn {
-    @apply text-white bg-gradient-to-r from-[#001f3f] to-[#0074D9] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center; /* Space Gradient */
+    @apply text-white bg-gradient-to-r from-[#12003f] to-[#0024d9] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center; /* Space Gradient */
   }
 
   .header {
@@ -129,7 +129,11 @@ body:has(.card[data-color="space-secondary"]:hover) {
 }
 
 .block-container .btn-back-blue {
-  background: linear-gradient(135deg, #001f3f -20%, #0074D9 120%); /* Space Gradient */
+  background: linear-gradient(
+    135deg,
+    #001f3f -20%,
+    #0074d9 120%
+  ); /* Space Gradient */
 }
 
 .block-container .btn-back-orange {
@@ -174,8 +178,7 @@ body:has(.card[data-color="space-secondary"]:hover) {
   border-radius: 10px;
   border: 1px solid rgb(var(--space-primary));
   box-shadow: 0.6vmin 0.6vmin rgb(var(--space-secondary)),
-    1vmin 1vmin rgb(var(--space-accent)),
-    1vmin 1vmin rgb(var(--space-accent)),
+    1vmin 1vmin rgb(var(--space-accent)), 1vmin 1vmin rgb(var(--space-accent)),
     0.65vmin 1vmin rgb(var(--space-accent)),
     1vmin 0.65vmin rgb(var(--space-accent));
 }
@@ -185,4 +188,11 @@ body:has(.card[data-color="space-secondary"]:hover) {
   border: 1px solid #fff;
   box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
     0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+}
+
+.date-text {
+  color: white;
+  font-size: 18px !important;
+  margin: -1px 10px !important;
+  text-shadow: 6px 6px 8px black;
 }

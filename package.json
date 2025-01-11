@@ -14,8 +14,11 @@
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.107.3",
     "@react-three/fiber": "^8.16.8",
+    "3d-portfolio": "file:",
+    "icons": "^1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^6.24.0",
     "react-vertical-timeline-component": "^3.6.0"
   },
