@@ -3,12 +3,26 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 
-import { experiences, skills } from "../contstants/index";
+import { experiences } from "../contstants/index";
 
 import "react-vertical-timeline-component/style.min.css";
 import CTA from "../components/CTA";
+import useSkills from "../../hooks/useGetSkills";
+import useExperience from "../../hooks/useGetExperience";
 
 const About = () => {
+  const { skills, loading: skillLoading } = useSkills();
+  const { experiences, loading: expLoading } = useExperience();
+  const filteredExpereinces = experiences.map((experience) => {
+    return {
+      company: experience.company,
+      description: experience.description,
+      role: experience.role,
+      iconBg: "#003770",
+      date: experience.fromDate + "-" + experience.toDate,
+    };
+  });
+
   return (
     <div
       style={{
@@ -47,18 +61,24 @@ const About = () => {
           </h3>
 
           <div className="mt-16 flex flex-wrap gap-12">
-            {skills.map((skill) => (
-              <div className="block-container w-20 h-20" key={skill.name}>
-                <div className="btn-back rounded-xl" />
-                <div className="btn-front rounded-xl flex justify-center items-center">
-                  <img
-                    src={skill.imageUrl}
-                    alt={skill.name}
-                    className="w-1/2 h-1/2 object-contain"
-                  />
+            {!skillLoading ? (
+              skills.map((skill) => (
+                <div className="block-container w-20 h-20" key={skill.name}>
+                  <div className="btn-back rounded-xl" />
+                  <div className="btn-front rounded-xl flex justify-center items-center">
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="w-1/2 h-1/2 object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center mx-auto text-slate-300 text-xl">
+                Fetching Skills...
+              </p>
+            )}
           </div>
         </div>
 
@@ -77,40 +97,46 @@ const About = () => {
 
           <div className="mt-12 flex">
             <VerticalTimeline>
-              {experiences.map((experience, index) => (
+              {filteredExpereinces?.map((experience, index) => (
                 <VerticalTimelineElement
-                  key={experience.company_name}
+                  key={experience.company}
                   date={experience.date}
                   dateClassName="date-text"
                   iconStyle={{ background: experience.iconBg }}
-                  icon={
-                    <div className="flex justify-center items-center w-full h-full">
-                      <img
-                        src={experience.icon}
-                        alt={experience.company_name}
-                        className="w-[60%] h-[60%] object-contain"
-                      />
-                    </div>
-                  }
+                  // icon={
+                  //   <div className="flex justify-center items-center w-full h-full">
+                  //     <img
+                  //       src={experience.icon}
+                  //       alt={experience.company_name}
+                  //       className="w-[60%] h-[60%] object-contain"
+                  //     />
+                  //   </div>
+                  // }
                   contentStyle={{
                     borderBottom: "8px",
                     borderStyle: "solid",
-                    borderBottomColor: experience.iconBg,
+                    // borderBottomColor: experience.iconBg,
                     boxShadow: "none",
                     backgroundColor: "rgba(0, 0, 128, 0.6)",
                   }}>
                   <div>
-                    <h3 className="text-white text-xl font-poppins font-semibold" style={{ textShadow: "6px 6px 8px black" }}>
-                      {experience.title}
+                    <h3
+                      className="text-white text-xl font-poppins font-semibold"
+                      style={{ textShadow: "6px 6px 8px black" }}>
+                      {experience.role}
                     </h3>
                     <p
                       className="text-white font-medium text-base"
                       style={{ margin: 0 }}>
-                      {experience.company_name}
+                      {experience.company}
                     </p>
                   </div>
 
-                  <ul className="my-5 list-disc ml-5 space-y-2">
+                  <p className="my-5 ml-5 text-white/50 font-normal pl-1 text-sm">
+                    {experience.description}
+                  </p>
+
+                  {/* <ul className="my-5 list-disc ml-5 space-y-2">
                     {experience.points.map((point, index) => (
                       <li
                         key={`experience-point-${index}`}
@@ -118,7 +144,7 @@ const About = () => {
                         {point}
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
                 </VerticalTimelineElement>
               ))}
             </VerticalTimeline>
