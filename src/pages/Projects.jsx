@@ -3,8 +3,11 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import CTA from "../components/CTA";
 import { projects } from "../contstants/index";
 import { arrow } from "../assets/icons";
+import useProjects from "../../hooks/useProjects";
 
 const Projects = () => {
+  const { projects, loading } = useProjects();
+
   return (
     <div
       style={{
@@ -41,7 +44,7 @@ const Projects = () => {
                 <div className={`btn-back rounded-xl ${project.theme}`} />
                 <div className="btn-front rounded-xl flex justify-center items-center">
                   <img
-                    src={project.iconUrl}
+                    src={project.icon}
                     alt="threads"
                     className="w-1/2 h-1/2 object-contain"
                   />
@@ -55,7 +58,7 @@ const Projects = () => {
                   {project.name}
                 </h4>
                 <p
-                  className="mt-2 text-slate-200"
+                  className="line-clamp-3 overflow-hidden mt-2 text-slate-200"
                   style={{ textShadow: "2px 2px 4px black" }}>
                   {project.description}
                 </p>
@@ -69,7 +72,7 @@ const Projects = () => {
                     Live Link
                   </Link>
                   <span
-                    className="w-4 h-4 text-blue-900"
+                    className="w-4 h-4 text-blue-300"
                     style={{ textShadow: "2px 2px 6px black" }}>
                     <FaArrowRightLong className="" />
                   </span>
