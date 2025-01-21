@@ -97,46 +97,51 @@ const About = () => {
 
           <div className="mt-12 flex">
             <VerticalTimeline>
-              {filteredExpereinces?.map((experience, index) => (
-                <VerticalTimelineElement
-                  key={experience.company}
-                  date={experience.date}
-                  dateClassName="date-text"
-                  iconStyle={{ background: experience.iconBg }}
-                  // icon={
-                  //   <div className="flex justify-center items-center w-full h-full">
-                  //     <img
-                  //       src={experience.icon}
-                  //       alt={experience.company_name}
-                  //       className="w-[60%] h-[60%] object-contain"
-                  //     />
-                  //   </div>
-                  // }
-                  contentStyle={{
-                    borderBottom: "8px",
-                    borderStyle: "solid",
-                    // borderBottomColor: experience.iconBg,
-                    boxShadow: "none",
-                    backgroundColor: "rgba(0, 0, 128, 0.6)",
-                  }}>
-                  <div>
-                    <h3
-                      className="text-white text-xl font-poppins font-semibold"
-                      style={{ textShadow: "6px 6px 8px black" }}>
-                      {experience.role}
-                    </h3>
-                    <p
-                      className="text-white font-medium text-base"
-                      style={{ margin: 0 }}>
-                      {experience.company}
+              {expLoading ? (
+                <p className="text-left mx-36 text-slate-300 text-xl">
+                  Fetching Experiences...
+                </p>
+              ) : (
+                filteredExpereinces?.map((experience, index) => (
+                  <VerticalTimelineElement
+                    key={experience.company}
+                    date={experience.date}
+                    dateClassName="date-text"
+                    iconStyle={{ background: experience.iconBg }}
+                    // icon={
+                    //   <div className="flex justify-center items-center w-full h-full">
+                    //     <img
+                    //       src={experience.icon}
+                    //       alt={experience.company_name}
+                    //       className="w-[60%] h-[60%] object-contain"
+                    //     />
+                    //   </div>
+                    // }
+                    contentStyle={{
+                      borderBottom: "8px",
+                      borderStyle: "solid",
+                      // borderBottomColor: experience.iconBg,
+                      boxShadow: "none",
+                      backgroundColor: "rgba(0, 0, 128, 0.6)",
+                    }}>
+                    <div>
+                      <h3
+                        className="text-white text-xl font-poppins font-semibold"
+                        style={{ textShadow: "6px 6px 8px black" }}>
+                        {experience.role}
+                      </h3>
+                      <p
+                        className="text-white font-medium text-base"
+                        style={{ margin: 0 }}>
+                        {experience.company}
+                      </p>
+                    </div>
+
+                    <p className="my-5 ml-5 text-white/50 font-normal pl-1 text-sm">
+                      {experience.description}
                     </p>
-                  </div>
 
-                  <p className="my-5 ml-5 text-white/50 font-normal pl-1 text-sm">
-                    {experience.description}
-                  </p>
-
-                  {/* <ul className="my-5 list-disc ml-5 space-y-2">
+                    {/* <ul className="my-5 list-disc ml-5 space-y-2">
                     {experience.points.map((point, index) => (
                       <li
                         key={`experience-point-${index}`}
@@ -145,8 +150,9 @@ const About = () => {
                       </li>
                     ))}
                   </ul> */}
-                </VerticalTimelineElement>
-              ))}
+                  </VerticalTimelineElement>
+                ))
+              )}
             </VerticalTimeline>
           </div>
         </div>

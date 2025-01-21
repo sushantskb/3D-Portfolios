@@ -38,48 +38,54 @@ const Projects = () => {
         </p>
 
         <div className="flex flex-wrap my-20 gap-16">
-          {projects.map((project) => (
-            <div className="lg:w-[400px] w-full" key={project.name}>
-              <div className="block-container w-12 h-12">
-                <div className={`btn-back rounded-xl ${project.theme}`} />
-                <div className="btn-front rounded-xl flex justify-center items-center">
-                  <img
-                    src={project.icon}
-                    alt="threads"
-                    className="w-1/2 h-1/2 object-contain"
-                  />
+          {loading ? (
+            <p className="text-center mx-auto text-slate-300 text-xl">
+              Fetching Projects....
+            </p>
+          ) : (
+            projects.map((project) => (
+              <div className="lg:w-[400px] w-full" key={project.name}>
+                <div className="block-container w-12 h-12">
+                  <div className={`btn-back rounded-xl ${project.theme}`} />
+                  <div className="btn-front rounded-xl flex justify-center items-center">
+                    <img
+                      src={project.icon}
+                      alt="threads"
+                      className="w-1/2 h-1/2 object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="mt-5 flex flex-col">
-                <h4
-                  className="text-white text-2xl font-poppins font-semibold"
-                  style={{ textShadow: "2px 2px 4px black" }}>
-                  {project.name}
-                </h4>
-                <p
-                  className="line-clamp-3 overflow-hidden mt-2 text-slate-200"
-                  style={{ textShadow: "2px 2px 4px black" }}>
-                  {project.description}
-                </p>
-                <div className="mt-5 flex items-center gap-2 font-poppins">
-                  <Link
-                    to={project.projectLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-blue-300"
+                <div className="mt-5 flex flex-col">
+                  <h4
+                    className="text-white text-2xl font-poppins font-semibold"
                     style={{ textShadow: "2px 2px 4px black" }}>
-                    Live Link
-                  </Link>
-                  <span
-                    className="w-4 h-4 text-blue-300"
-                    style={{ textShadow: "2px 2px 6px black" }}>
-                    <FaArrowRightLong className="" />
-                  </span>
+                    {project.name}
+                  </h4>
+                  <p
+                    className="line-clamp-3 overflow-hidden mt-2 text-slate-200"
+                    style={{ textShadow: "2px 2px 4px black" }}>
+                    {project.description}
+                  </p>
+                  <div className="mt-5 flex items-center gap-2 font-poppins">
+                    <Link
+                      to={project.projectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-blue-300"
+                      style={{ textShadow: "2px 2px 4px black" }}>
+                      Live Link
+                    </Link>
+                    <span
+                      className="w-4 h-4 text-blue-300"
+                      style={{ textShadow: "2px 2px 6px black" }}>
+                      <FaArrowRightLong className="" />
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <hr className="border-slate-200" />
