@@ -4,7 +4,9 @@ import { Canvas } from "@react-three/fiber";
 
 import Loader from "../components/Loader";
 import Fox from "../models/Fox";
+import { FaCheck } from "react-icons/fa";
 const Contact = () => {
+  const [sent, setSent] = useState(false);
   const formRef = useRef(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
@@ -22,37 +24,40 @@ const Contact = () => {
     setCurrentAnimation("walk");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setCurrentAnimation("hit");
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Sushant",
-          from_email: form.email,
-          to_email: "sushantbishoi.developer@gmail.com",
-          message: form.message,
+    try {
+      const url = import.meta.env.VITE_APP_URL;
+      const resp = await fetch(`${url}/api~v1/contact/send-message`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(() => {
-        setLoading(false);
+        body: JSON.stringify(form),
+      });
 
+      const data = await resp.json();
+
+      if (data.success) {
+        setSent(true);
         setTimeout(() => {
           setCurrentAnimation("idle");
           setForm({ name: "", email: "", message: "" });
+          setSent(false);
         }, [3000]);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
+      }
+    } catch (error) {
+      setTimeout(() => {
         setCurrentAnimation("idle");
-      });
+        setForm({ name: "", email: "", message: "" });
+        setSent(false);
+      }, [3000]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -68,7 +73,9 @@ const Contact = () => {
       <div className="absolute top-0 bottom-0 left-0 right-0 bg-black/30 z-10"></div>
       <section className=" relative flex lg:flex-row flex-col max-container z-20">
         <div className="flex-1 min-w-[50%] flex flex-col">
-          <h1 className="head-text text-slate-300" style={{ textShadow: "2px 2px 4px black" }}>
+          <h1
+            className="head-text text-slate-300"
+            style={{ textShadow: "2px 2px 4px black" }}>
             Get in Touch
           </h1>
 
@@ -117,14 +124,29 @@ const Contact = () => {
               />
             </label>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn"
-              onFocus={handleFocus}
-              onBlur={handleBlur}>
-              {loading ? "Sending..." : "Submit"}
-            </button>
+            {sent ? (
+              <button
+                disabled={true}
+                className={` flex items-center justify-center gap-1 !text-xl ${
+                  sent ? "bg-gray-500 p-2 rounded-xl text-white" : "btn"
+                }`}
+                onFocus={handleFocus}
+                onBlur={handleBlur}>
+                <span className="bg-green-500 rounded-full p-[4px]">
+                  <FaCheck size={8} />
+                </span>{" "}
+                Sent
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn"
+                onFocus={handleFocus}
+                onBlur={handleBlur}>
+                {loading ? "Sending..." : "Submit"}
+              </button>
+            )}
           </form>
         </div>
 
